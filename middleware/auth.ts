@@ -28,9 +28,13 @@ export const auth = asyncHandler(
       return next(new ApiError(401, "Unauthorized: No token provided"));
     }
 
+    if (!process.env.JWT_SECRET_KEY) {
+      return next(new ApiError(500, "JWT secret key not configured"));
+    }
+
     let decoded;
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET_KEY!);
+      decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     } catch (error: any) {
       if (error.name === "TokenExpiredError") {
         return next(new ApiError(401, "Access token expired"));
@@ -43,7 +47,7 @@ export const auth = asyncHandler(
 
     const auth_token = await authTokenRepository.findOne({
       where: { token },
-      relations: ["users"],
+      relations: ["user"],
     });
 
     if (!auth_token || !auth_token.user) {

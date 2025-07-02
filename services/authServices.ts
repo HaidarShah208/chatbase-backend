@@ -6,7 +6,10 @@ import { ApiError } from "../utils/ApiError";
 import { AppDataSource } from "../config/database";
 import { User } from "../models/User";
 import { AuthToken } from "../models/AuthToken";
+import * as dotenv from "dotenv";
 
+
+dotenv.config();
 const sanitizeUser = (user: User) => {
   const { password, ...cleanUser } = user;
   return cleanUser;
@@ -34,7 +37,11 @@ export const registerUser = async ({ name, email, password }: any) => {
 
   const savedUser = await userRepository.save(newUser);
 
-  const token = jwt.sign({ id: savedUser.id }, process.env.JWT_SECRET_KEY!, {
+  if (!process.env.JWT_SECRET_KEY) {
+    throw new ApiError(500, "JWT secret key not configured");
+  }
+
+  const token = jwt.sign({ id: savedUser.id }, process.env.JWT_SECRET_KEY, {
     expiresIn: "40d",
   });
 
@@ -57,7 +64,11 @@ export const loginUser = async ({ email, password }: any) => {
     throw new ApiError(400, "Invalid credentials");
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY!, {
+  if (!process.env.JWT_SECRET_KEY) {
+    throw new ApiError(500, "JWT secret key not configured");
+  }
+
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
     expiresIn: "40d",
   });
 

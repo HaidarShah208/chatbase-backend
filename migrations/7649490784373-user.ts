@@ -38,11 +38,13 @@ export class User7649490784373 implements MigrationInterface {
           {
             name: "created_at",
             type: "timestamp",
+            default: "CURRENT_TIMESTAMP",
             isNullable: true,
           },
           {
             name: "updated_at",
             type: "timestamp",
+            default: "CURRENT_TIMESTAMP",
             isNullable: true,
           },
           
