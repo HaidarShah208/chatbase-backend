@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../config/database";
-import { User } from "../models/User";
+import { User } from "../models/user";
 
 const userRepository = AppDataSource.getRepository(User);
 
-export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+export const getAllUsers = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const users = await userRepository.find();
     res.json(users);
@@ -13,27 +16,33 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-export const getUserById = async (req: Request, res: Response): Promise<void> => {
+export const getUserById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const user = await userRepository.findOne({ 
-      where: { id: parseInt(req.params.id) } 
+    const user = await userRepository.findOne({
+      where: { id: parseInt(req.params.id) },
     });
-    
+
     if (!user) {
       res.status(404).json({ error: "User not found" });
       return;
     }
-    
+
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch user" });
   }
 };
 
-export const createUser = async (req: Request, res: Response): Promise<void> => {
+export const createUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { email, name } = req.body;
-    
+
     if (!email || !name) {
       res.status(400).json({ error: "Email and name are required" });
       return;
@@ -41,7 +50,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 
     const user = userRepository.create({
       email,
-      name
+      name,
     });
 
     const savedUser = await userRepository.save(user);
@@ -51,13 +60,16 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
   }
 };
 
-export const updateUser = async (req: Request, res: Response): Promise<void> => {
+export const updateUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { email, name } = req.body;
-    const user = await userRepository.findOne({ 
-      where: { id: parseInt(req.params.id) } 
+    const user = await userRepository.findOne({
+      where: { id: parseInt(req.params.id) },
     });
-    
+
     if (!user) {
       res.status(404).json({ error: "User not found" });
       return;
@@ -73,12 +85,15 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
   }
 };
 
-export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+export const deleteUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const user = await userRepository.findOne({ 
-      where: { id: parseInt(req.params.id) } 
+    const user = await userRepository.findOne({
+      where: { id: parseInt(req.params.id) },
     });
-    
+
     if (!user) {
       res.status(404).json({ error: "User not found" });
       return;
@@ -89,4 +104,4 @@ export const deleteUser = async (req: Request, res: Response): Promise<void> => 
   } catch (error) {
     res.status(500).json({ error: "Failed to delete user" });
   }
-}; 
+};
