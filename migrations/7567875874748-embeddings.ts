@@ -6,7 +6,7 @@ export class Embeddings7567875874748 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "Embeddings",
+        name: "embeddings",
         columns: [
           {
             name: "id",
@@ -43,6 +43,6 @@ export class Embeddings7567875874748 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("Embeddings");
+    await queryRunner.dropTable("embeddings");
   }
 }

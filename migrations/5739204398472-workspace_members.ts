@@ -6,7 +6,7 @@ export class WorkSpaceMembers5739204398472 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "WorkSpaceMembers",
+        name: "work_space_members",
         columns: [
           {
             name: "id",
@@ -52,6 +52,6 @@ export class WorkSpaceMembers5739204398472 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("WorkSpaceMembers");
+    await queryRunner.dropTable("work_space_members");
   }
 }

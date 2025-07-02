@@ -6,7 +6,7 @@ export class CleanedContents7567272727272 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "CleanedContents",
+        name: "cleaned_contents",
         columns: [
           {
             name: "id",
@@ -44,6 +44,6 @@ export class CleanedContents7567272727272 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("CleanedContents");
+    await queryRunner.dropTable("cleaned_contents");
   }
 }

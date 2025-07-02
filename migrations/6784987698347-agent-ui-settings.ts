@@ -6,7 +6,7 @@ export class AgentUiSettings6784987698347 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "AgentUiSettings",
+        name: "agent_ui_settings",
         columns: [
           {
             name: "id",
@@ -92,6 +92,6 @@ export class AgentUiSettings6784987698347 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("AgentUiSettings");
+    await queryRunner.dropTable("agent_ui_settings");
   }
 }
