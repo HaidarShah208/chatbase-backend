@@ -36,6 +36,7 @@ import { AgentSettings } from "../models/AgentSettings";
 import { BillingHistory } from "../models/BillingHistory";
 import { ConversationInterface } from "../models/ConversationInterface";
 import { AuthToken } from "../models/AuthToken";
+import { OTP } from "../models/OTP";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -84,6 +85,7 @@ export const AppDataSource = new DataSource({
     BillingHistory,
     ConversationInterface,
     AuthToken,
+    OTP,
   ],
   subscribers: [],
   migrations: ["migrations/*.ts"],

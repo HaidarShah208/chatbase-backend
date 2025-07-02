@@ -6,6 +6,7 @@ import { ApiError } from "../utils/ApiError";
 import { AppDataSource } from "../config/database";
 import { User } from "../models/User";
 import { AuthToken } from "../models/AuthToken";
+import { OTP } from "../models/OTP";
 import * as dotenv from "dotenv";
 
 
@@ -17,6 +18,7 @@ const sanitizeUser = (user: User) => {
 
 const userRepository = AppDataSource.getRepository(User);
 const authTokenRepository = AppDataSource.getRepository(AuthToken);
+const otpRepository = AppDataSource.getRepository(OTP);
 
 export const registerUser = async ({ name, email, password }: any) => {
   const existingUser = await userRepository.findOne({
@@ -86,12 +88,24 @@ export const sendForgetOtp = async (email: any) => {
   const user = await userRepository.findOne({ where: { email } });
   if (!user) throw new ApiError(404, "User not found");
 
-  const code = randomNumber(1000, 9999);
-  
+  const code = randomNumber(1000, 9999).toString();
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+
+  // Invalidate previous OTPs for this email
+  await otpRepository.update({ email, isUsed: false }, { isUsed: true });
+
+  const otp = otpRepository.create({
+    email,
+    code,
+    isUsed: false,
+    expiresAt,
+  });
+  await otpRepository.save(otp);
+
   await sendEmail({
     to: email,
     subject: "Reset your password",
-    text: `Your OTP code is ${code}. Please contact support to reset your password.`,
+    text: `Your OTP code is ${code}. It will expire in 10 minutes.`,
   });
 };
 
@@ -101,8 +115,18 @@ export const verifyOtpAndResetPassword = async ({
   password,
 }: any) => {
   const user = await userRepository.findOne({ where: { email } });
-
   if (!user) throw new ApiError(400, "Incorrect email");
+
+  const otp = await otpRepository.findOne({
+    where: { email, code, isUsed: false },
+    order: { createdAt: "DESC" },
+  });
+  if (!otp) throw new ApiError(400, "Invalid or expired OTP");
+  if (otp.expiresAt < new Date()) throw new ApiError(400, "OTP has expired");
+
+  otp.isUsed = true;
+  await otpRepository.save(otp);
+
   const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   user.password = hashedPassword;
   await userRepository.save(user);
