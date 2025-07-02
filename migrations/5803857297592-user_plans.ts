@@ -1,0 +1,53 @@
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
+
+export class UserPlans5803857297592 implements MigrationInterface {
+  name = "UserPlans5803857297592";
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: "UserPlans",
+        columns: [
+          {
+            name: "id",
+            type: "bigint",
+            isPrimary: true,
+            isGenerated: true,
+            generationStrategy: "increment",
+          },
+          {
+            name: "user_id",
+            type: "bigint",
+            isNullable: true,
+          },
+          {
+            name: "plan_id",
+            type: "bigint",
+            isNullable: true,
+          },
+          {
+            name: "status",
+            type: "enum",
+            enum: ["active", "inactive", "expired"],
+            isNullable: true,
+          },
+          {
+            name: "start_date",
+            type: "timestamp",
+            isNullable: true,
+          },
+          {
+            name: "end_date",
+            type: "timestamp",
+            isNullable: true,
+          },
+        ],
+      }),
+      true
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable("UserPlans");
+  }
+}
