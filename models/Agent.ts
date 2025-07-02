@@ -6,22 +6,31 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity("users")
-export class User {
+@Entity("agent")
+export class Agent {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
   id!: number;
 
   @Column({ type: "bigint", nullable: true })
-  role_id!: number;
+  user_id!: number;
 
   @Column({ type: "text", nullable: true })
   name!: string;
 
-  @Column({ type: "text", unique: true, nullable: true })
-  email!: string;
+  @Column({ type: "text", nullable: true })
+  description!: string;
+
+  @Column({ type: "varchar", nullable: true })
+  tone!: string;
 
   @Column({ type: "text", nullable: true })
-  password!: string;
+  system_prompt!: string;
+
+  @Column({ type: "text", nullable: true })
+  fallback_message!: string;
+
+  @Column({ type: "bigint", nullable: true })
+  new_column!: number;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp", nullable: true })
   createdAt!: Date;

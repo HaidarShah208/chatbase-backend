@@ -6,26 +6,23 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity("users")
-export class User {
+@Entity("teams")
+export class Teams {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
   id!: number;
 
-  @Column({ type: "bigint", nullable: true })
-  role_id!: number;
-
   @Column({ type: "text", nullable: true })
-  name!: string;
+  team_name?: string;
 
-  @Column({ type: "text", unique: true, nullable: true })
-  email!: string;
-
-  @Column({ type: "text", nullable: true })
-  password!: string;
+  @Column({ type: "varchar", nullable: true })
+  team_url?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp", nullable: true })
-  createdAt!: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn({ name: "updated_at", type: "timestamp", nullable: true })
-  updatedAt!: Date;
+  updatedAt?: Date;
+
+  @Column({ type: "bigint", nullable: true })
+  user_id?: number;
 }
