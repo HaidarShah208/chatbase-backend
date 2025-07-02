@@ -41,16 +41,18 @@ export const createUser = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { email, name } = req.body;
+    const { email, name, password, role_id } = req.body;
 
-    if (!email || !name) {
-      res.status(400).json({ error: "Email and name are required" });
+    if (!email || !name || !password) {
+      res.status(400).json({ error: "Email, name, and password are required" });
       return;
     }
 
     const user = userRepository.create({
       email,
       name,
+      password,
+      role_id: role_id || null,
     });
 
     const savedUser = await userRepository.save(user);
@@ -65,7 +67,7 @@ export const updateUser = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { email, name } = req.body;
+    const { email, name, password, role_id } = req.body;
     const user = await userRepository.findOne({
       where: { id: parseInt(req.params.id) },
     });
@@ -75,8 +77,10 @@ export const updateUser = async (
       return;
     }
 
-    user.email = email || user.email;
-    user.name = name || user.name;
+    user.email = email ?? user.email;
+    user.name = name ?? user.name;
+    user.password = password ?? user.password;
+    user.role_id = role_id ?? user.role_id;
 
     const updatedUser = await userRepository.save(user);
     res.json(updatedUser);
