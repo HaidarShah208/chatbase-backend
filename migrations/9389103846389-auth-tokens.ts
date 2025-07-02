@@ -2,10 +2,9 @@ import {
   MigrationInterface,
   QueryRunner,
   Table,
-  TableForeignKey,
 } from "typeorm";
 
-export class AuthTokensMigration0000000000000 implements MigrationInterface {
+export class AuthTokens9389103846389 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -28,15 +27,6 @@ export class AuthTokensMigration0000000000000 implements MigrationInterface {
           { name: "expiresAt", type: "timestamp", isNullable: true },
           { name: "revoked", type: "boolean", default: false },
         ],
-      })
-    );
-    await queryRunner.createForeignKey(
-      "auth_tokens",
-      new TableForeignKey({
-        columnNames: ["userId"],
-        referencedColumnNames: ["id"],
-        referencedTableName: "user",
-        onDelete: "CASCADE",
       })
     );
   }

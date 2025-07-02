@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { User } from "../models/user";
+import { User } from "../models/User";
 import { Agent } from "../models/Agent";
 import { BillingCards } from "../models/BillingCards";
 import { PaymentMethods } from "../models/PaymentMethods";
@@ -35,13 +35,14 @@ import { PlaygroundMessages } from "../models/PlaygroundMessages";
 import { AgentSettings } from "../models/AgentSettings";
 import { BillingHistory } from "../models/BillingHistory";
 import { ConversationInterface } from "../models/ConversationInterface";
+import { AuthToken } from "../models/AuthToken";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: process.env.DB_HOST || "localhost",
   port: parseInt(process.env.DB_PORT || "5432"),
   username: process.env.DB_USERNAME || "postgres",
-  password: process.env.DB_PASSWORD || "1234",
+  password: process.env.DB_PASSWORD || "root",
   database: process.env.DB_DATABASE || "chatbase",
   synchronize: process.env.DB_SYNCHRONIZE === "true",
   logging: process.env.DB_LOGGING === "true",
@@ -82,6 +83,7 @@ export const AppDataSource = new DataSource({
     AgentSettings,
     BillingHistory,
     ConversationInterface,
+    AuthToken,
   ],
   subscribers: [],
   migrations: ["migrations/*.ts"],

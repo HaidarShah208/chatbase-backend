@@ -58,7 +58,6 @@ export const login = asyncHandler(
     const loginSchema = Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      attempt: Joi.number().default(0),
     });
 
     const error = await validator(loginSchema, req.body);

@@ -45,21 +45,7 @@ export class User7649490784373 implements MigrationInterface {
             type: "timestamp",
             isNullable: true,
           },
-          {
-            name: "status",
-            type: "varchar",
-            isNullable: true,
-          },
-          {
-            name: "blockUntil",
-            type: "timestamp",
-            isNullable: true,
-          },
-          {
-            name: "code",
-            type: "int",
-            isNullable: true,
-          },
+          
         ],
       }),
       true

@@ -3,10 +3,11 @@ import { ApiError } from "../utils/ApiError";
 import { asyncHandler } from "../utils/asyncHandler";
 import { AppDataSource } from "../config/database";
 import { AuthToken } from "../models/AuthToken";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 const authTokenRepository = AppDataSource.getRepository(AuthToken);
 
-console.log(process.env.JWT_SECRET_KEY);
 
 export const auth = asyncHandler(
   async (
@@ -42,7 +43,7 @@ export const auth = asyncHandler(
 
     const auth_token = await authTokenRepository.findOne({
       where: { token },
-      relations: ["user"],
+      relations: ["users"],
     });
 
     if (!auth_token || !auth_token.user) {

@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "./user";
+import { User } from "./User";
 
 @Entity({ name: "auth_tokens" })
 export class AuthToken {

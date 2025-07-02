@@ -1,15 +1,14 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import moment from "moment";
 import randomNumber from "../utils/randomNumber";
 import sendEmail from "../utils/email";
 import { ApiError } from "../utils/ApiError";
 import { AppDataSource } from "../config/database";
-import { User } from "../models/user";
+import { User } from "../models/User";
 import { AuthToken } from "../models/AuthToken";
 
 const sanitizeUser = (user: User) => {
-  const { password, ...cleanUser } = user.get({ plain: true });
+  const { password, ...cleanUser } = user;
   return cleanUser;
 };
 
@@ -27,39 +26,29 @@ export const registerUser = async ({ name, email, password }: any) => {
 
   const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-  const newUser = await userRepository.create({
+  const newUser = userRepository.create({
     name,
     email,
     password: hashedPassword,
   });
 
-  const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET_KEY!, {
+  const savedUser = await userRepository.save(newUser);
+
+  const token = jwt.sign({ id: savedUser.id }, process.env.JWT_SECRET_KEY!, {
     expiresIn: "40d",
   });
 
-  const newToken = authTokenRepository.create({ userId: newUser.id, token });
+  const newToken = authTokenRepository.create({ userId: savedUser.id, token });
   await authTokenRepository.save(newToken);
 
-  return { user: sanitizeUser(newUser), token };
+  return { user: sanitizeUser(savedUser), token };
 };
 
-export const loginUser = async ({ email, password, attempt }: any) => {
+export const loginUser = async ({ email, password }: any) => {
   const user = await userRepository.findOne({ where: { email } });
 
   if (!user) {
     throw new ApiError(400, "Invalid credentials");
-  }
-
-  if (attempt > 5) {
-    await userRepository.update(
-      { email },
-      { status: "block", blockUntil: moment().add(24, "hours").toDate() }
-    );
-    throw new ApiError(403, "You are blocked for 24 hours. Try again later.");
-  }
-
-  if (user.status === "block") {
-    throw new ApiError(403, "You are currently blocked");
   }
 
   const isMatch = bcrypt.compareSync(password, user.password);
@@ -87,13 +76,11 @@ export const sendForgetOtp = async (email: any) => {
   if (!user) throw new ApiError(404, "User not found");
 
   const code = randomNumber(1000, 9999);
-  user.code = code;
-  await userRepository.save(user);
-
+  
   await sendEmail({
     to: email,
     subject: "Reset your password",
-    text: `Your OTP code is ${code}`,
+    text: `Your OTP code is ${code}. Please contact support to reset your password.`,
   });
 };
 
@@ -102,12 +89,10 @@ export const verifyOtpAndResetPassword = async ({
   code,
   password,
 }: any) => {
-  const user = await userRepository.findOne({ where: { email, code } });
+  const user = await userRepository.findOne({ where: { email } });
 
-  if (!user) throw new ApiError(400, "Incorrect OTP or email");
-
+  if (!user) throw new ApiError(400, "Incorrect email");
   const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   user.password = hashedPassword;
-  user.code = undefined;
   await userRepository.save(user);
 };
