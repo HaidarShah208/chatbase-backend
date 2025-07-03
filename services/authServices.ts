@@ -9,7 +9,6 @@ import { AuthToken } from "../models/AuthToken";
 import { OTP } from "../models/OTP";
 import * as dotenv from "dotenv";
 
-
 dotenv.config();
 const sanitizeUser = (user: User) => {
   const { password, ...cleanUser } = user;
@@ -89,9 +88,8 @@ export const sendForgetOtp = async (email: any) => {
   if (!user) throw new ApiError(404, "User not found");
 
   const code = randomNumber(1000, 9999).toString();
-  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-  // Invalidate previous OTPs for this email
   await otpRepository.update({ email, isUsed: false }, { isUsed: true });
 
   const otp = otpRepository.create({
