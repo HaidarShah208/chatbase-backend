@@ -1,12 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum RetrievalJobStatus {
-  PENDING = "pending",
-  IN_PROGRESS = "in_progress",
-  COMPLETED = "completed",
-  FAILED = "failed",
-}
-
 @Entity("retrieval_jobs")
 export class RetrievalJobs {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -15,8 +8,8 @@ export class RetrievalJobs {
   @Column({ type: "bigint", nullable: true })
   source_id?: number;
 
-  @Column({ type: "enum", enum: RetrievalJobStatus, nullable: true })
-  status?: RetrievalJobStatus;
+  @Column({ type: "varchar", nullable: true })
+  status?: string;
 
   @Column({ type: "decimal", nullable: true })
   progress?: number;

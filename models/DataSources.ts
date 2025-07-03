@@ -6,18 +6,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-export enum SourceType {
-  FILE = "file",
-  URL = "url",
-  API = "api",
-}
-
-export enum DataSourceStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  PENDING = "pending",
-}
-
 @Entity("data_sources")
 export class DataSources {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -26,8 +14,8 @@ export class DataSources {
   @Column({ type: "bigint", nullable: true })
   agent_id?: number;
 
-  @Column({ type: "enum", enum: SourceType, nullable: true })
-  source_type?: SourceType;
+  @Column({ type: "varchar", nullable: true })
+  source_type?: string;
 
   @Column({ type: "varchar", nullable: true })
   name?: string;
@@ -44,8 +32,8 @@ export class DataSources {
   @Column({ type: "text", nullable: true })
   url?: string;
 
-  @Column({ type: "enum", enum: DataSourceStatus, nullable: true })
-  status?: DataSourceStatus;
+  @Column({ type: "varchar", nullable: true })
+  status?: string;
 
   @Column({ type: "int", nullable: true })
   size_kb?: number;

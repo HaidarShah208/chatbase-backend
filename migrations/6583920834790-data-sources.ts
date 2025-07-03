@@ -22,8 +22,8 @@ export class DataSources6583920834790 implements MigrationInterface {
           },
           {
             name: "source_type",
-            type: "enum",
-            enum: ["file", "url", "api"],
+            type: "string",
+
             isNullable: true,
           },
           {
@@ -53,8 +53,8 @@ export class DataSources6583920834790 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive", "pending"],
+            type: "string",
+
             isNullable: true,
           },
           {

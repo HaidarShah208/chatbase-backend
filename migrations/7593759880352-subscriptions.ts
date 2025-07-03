@@ -28,8 +28,8 @@ export class Subscriptions7593759880352 implements MigrationInterface {
 
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive", "cancelled"],
+            type: "string",
+            
             isNullable: true,
           },
           { name: "next_payment_due", type: "timestamp", isNullable: true },

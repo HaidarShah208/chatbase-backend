@@ -1,15 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum AgentSettingsStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-}
-
-export enum AgentModel {
-  GPT3_5 = "gpt-3.5",
-  GPT4 = "gpt-4",
-}
-
 @Entity("agent_settings")
 export class AgentSettings {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -18,11 +8,11 @@ export class AgentSettings {
   @Column({ type: "bigint", nullable: true })
   agent_id?: number;
 
-  @Column({ type: "enum", enum: AgentSettingsStatus, nullable: true })
-  status?: AgentSettingsStatus;
+  @Column({ type: "varchar", nullable: true })
+  status?: string;
 
-  @Column({ type: "enum", enum: AgentModel, nullable: true })
-  model?: AgentModel;
+  @Column({ type: "varchar", nullable: true })
+  model?: string;
 
   @Column({ type: "float", nullable: true })
   temperature?: number;

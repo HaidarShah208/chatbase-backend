@@ -28,8 +28,8 @@ export class TeamPlans6578900989898 implements MigrationInterface {
 
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive", "pending", "expired"],
+            type: "string",
+   
             isNullable: true,
           },
           { name: "started_at", type: "timestamp", isNullable: true },

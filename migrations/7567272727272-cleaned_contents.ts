@@ -27,8 +27,8 @@ export class CleanedContents7567272727272 implements MigrationInterface {
           },
           {
             name: "cleaning_status",
-            type: "enum",
-            enum: ["pending", "in_progress", "completed", "failed"],
+            type: "string",
+
             isNullable: true,
           },
 

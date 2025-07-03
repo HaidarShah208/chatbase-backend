@@ -1,11 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum InvoiceStatus {
-  PAID = "paid",
-  UNPAID = "unpaid",
-  REFUNDED = "refunded",
-}
-
 @Entity("invoices")
 export class Invoices {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -17,8 +11,8 @@ export class Invoices {
   @Column({ type: "decimal", nullable: true })
   amount?: number;
 
-  @Column({ type: "enum", enum: InvoiceStatus, nullable: true })
-  status?: InvoiceStatus;
+  @Column({ type: "varchar", nullable: true })
+  status?: string;
 
   @Column({ type: "text", nullable: true })
   invoice_url?: string;

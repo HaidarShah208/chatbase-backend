@@ -1,17 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum TeamRole {
-  ADMIN = "admin",
-  MEMBER = "member",
-  GUEST = "guest",
-}
-
-export enum TeamStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  PENDING = "pending",
-  REMOVED = "removed",
-}
+ 
 
 @Entity("team_members")
 export class TeamMembers {
@@ -24,11 +13,11 @@ export class TeamMembers {
   @Column({ type: "bigint", nullable: true })
   user_id?: number;
 
-  @Column({ type: "enum", enum: TeamRole, nullable: true })
-  role?: TeamRole;
+  @Column({ type: "varchar",  nullable: true })
+  role?: string;
 
-  @Column({ type: "enum", enum: TeamStatus, nullable: true })
-  status?: TeamStatus;
+  @Column({ type: "varchar",  nullable: true })
+  status?: string;
 
   @Column({ type: "timestamp", nullable: true })
   last_active_at?: Date;

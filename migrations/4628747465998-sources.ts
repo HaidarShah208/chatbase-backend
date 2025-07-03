@@ -22,8 +22,8 @@ export class Sources4628747465998 implements MigrationInterface {
           },
           {
             name: "type",
-            type: "enum",
-            enum: ["file", "text", "q&a", "website", "notion"],
+            type: "string",
+
             isNullable: true,
           },
           {
@@ -33,8 +33,8 @@ export class Sources4628747465998 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive"],
+            type: "string",
+
             isNullable: true,
           },
           {

@@ -6,10 +6,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-export enum PlanStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-}
+ 
 
 @Entity("plans")
 export class Plans {
@@ -25,8 +22,8 @@ export class Plans {
   @Column({ type: "text", nullable: true })
   description?: string;
 
-  @Column({ type: "enum", enum: PlanStatus, nullable: true })
-  status?: PlanStatus;
+  @Column({ type: "varchar",   nullable: true })
+  status?: string;
 
   @Column({ type: "int", nullable: true })
   credits?: number;

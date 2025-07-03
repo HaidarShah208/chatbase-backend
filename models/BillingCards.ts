@@ -1,12 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum CardBrand {
-  VISA = "visa",
-  MASTERCARD = "mastercard",
-  AMEX = "amex",
-  DISCOVER = "discover",
-}
-
 @Entity("billing_cards")
 export class BillingCards {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })

@@ -5,11 +5,7 @@ import {
   CreateDateColumn,
 } from "typeorm";
 
-export enum BillingStatus {
-  PAID = "paid",
-  UNPAID = "unpaid",
-  PENDING = "pending",
-}
+ 
 
 @Entity("billing_History")
 export class BillingHistory {
@@ -22,8 +18,8 @@ export class BillingHistory {
   @Column({ type: "double precision", nullable: true })
   amount?: number;
 
-  @Column({ type: "enum", enum: BillingStatus, nullable: true })
-  status?: BillingStatus;
+  @Column({ type: "varchar",  nullable: true })
+  status?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp", nullable: true })
   createdAt?: Date;

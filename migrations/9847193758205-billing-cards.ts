@@ -17,8 +17,8 @@ export class BillingCards9847193758205 implements MigrationInterface {
           },
           {
             name: "Brand",
-            type: "enum",
-            enum: ["visa", "mastercard", "amex", "discover"],
+            type: "string",
+
             isNullable: true,
           },
           {

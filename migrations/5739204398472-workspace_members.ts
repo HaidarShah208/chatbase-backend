@@ -29,8 +29,8 @@ export class WorkSpaceMembers5739204398472 implements MigrationInterface {
           { name: "role", type: "text", isNullable: true },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive"],
+            type: "string",
+
             isNullable: true,
           },
           { name: "last_active_at", type: "timestamp", isNullable: true },

@@ -43,8 +43,8 @@ export class ConversationInterface3095764507238 implements MigrationInterface {
           },
           {
             name: "theme",
-            type: "enum",
-            enum: ["light", "dark"],
+            type: "string",
+
             isNullable: true,
           },
           {
@@ -59,20 +59,20 @@ export class ConversationInterface3095764507238 implements MigrationInterface {
           },
           {
             name: "user_message_color",
-            type: "enum",
-            enum: ["blue", "green", "red"],
+            type: "string",
+
             isNullable: true,
           },
           {
             name: "chat_button_color",
-            type: "enum",
-            enum: ["primary", "secondary", "danger"],
+            type: "string",
+
             isNullable: true,
           },
           {
             name: "alignment",
-            type: "enum",
-            enum: ["left", "right", "center"],
+            type: "string",
+
             isNullable: true,
           },
         ],

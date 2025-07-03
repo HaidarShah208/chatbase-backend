@@ -22,8 +22,8 @@ export class PlaygroundMessages4847567898756 implements MigrationInterface {
           },
           {
             name: "sender",
-            type: "enum",
-            enum: ["user", "assistant", "system"],
+            type: "string",
+
             isNullable: true,
           },
           {

@@ -22,14 +22,12 @@ export class AgentSetting0491820841082 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive"],
+            type: "string",
             isNullable: true,
           },
           {
             name: "model",
-            type: "enum",
-            enum: ["gpt-3.5", "gpt-4"],
+            type: "string",
             isNullable: true,
           },
           {

@@ -6,11 +6,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-export enum WorkSpaceMemberStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-}
-
 @Entity("work_space_members")
 export class WorkSpaceMembers {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -25,8 +20,8 @@ export class WorkSpaceMembers {
   @Column({ type: "text", nullable: true })
   role?: string;
 
-  @Column({ type: "enum", enum: WorkSpaceMemberStatus, nullable: true })
-  status?: WorkSpaceMemberStatus;
+  @Column({ type: "varchar", nullable: true })
+  status?: string;
 
   @Column({ type: "timestamp", nullable: true })
   last_active_at?: Date;

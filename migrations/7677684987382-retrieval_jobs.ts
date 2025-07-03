@@ -22,8 +22,8 @@ export class RetrivalJobs7677684987382 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["pending", "in_progress", "completed", "failed"],
+            type: "string",
+            
             isNullable: true,
           },
           {

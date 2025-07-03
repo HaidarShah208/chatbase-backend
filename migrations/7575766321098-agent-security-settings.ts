@@ -22,8 +22,8 @@ export class AgentSecuritySettings7575766321098 implements MigrationInterface {
           },
           {
             name: "visibility",
-            type: "enum",
-            enum: ["public", "private", "restricted"],
+            type: "string",
+
             isNullable: true,
           },
           { name: "rate_limit_per_user", type: "integer", isNullable: true },

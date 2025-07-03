@@ -27,14 +27,14 @@ export class TeamMembers7684983867790 implements MigrationInterface {
           },
           {
             name: "role",
-            type: "enum",
-            enum: ["admin", "member", "guest"],
+            type: "string",
+
             isNullable: true,
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive", "pending", "removed"],
+            type: "string",
+
             isNullable: true,
           },
           { name: "last_active_at", type: "timestamp", isNullable: true },

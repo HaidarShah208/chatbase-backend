@@ -6,13 +6,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-export enum PlaygroundSessionStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  COMPLETED = "completed",
-  FAILED = "failed",
-}
-
 @Entity("playground_sessions")
 export class PlaygroundSessions {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -24,8 +17,8 @@ export class PlaygroundSessions {
   @Column({ type: "bigint", nullable: true })
   agent_id?: number;
 
-  @Column({ type: "enum", enum: PlaygroundSessionStatus, nullable: true })
-  status?: PlaygroundSessionStatus;
+  @Column({ type: "varchar", nullable: true })
+  status?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp", nullable: true })
   createdAt?: Date;

@@ -22,8 +22,8 @@ export class TrainingLogs7683929292924 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["pending", "in_progress", "completed", "failed"],
+            type: "string",
+            
             isNullable: true,
           },
           {

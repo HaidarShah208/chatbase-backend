@@ -5,12 +5,6 @@ import {
   CreateDateColumn,
 } from "typeorm";
 
-export enum PlaygroundSender {
-  USER = "user",
-  ASSISTANT = "assistant",
-  SYSTEM = "system",
-}
-
 @Entity("playground_messages")
 export class PlaygroundMessages {
   @PrimaryGeneratedColumn("increment", { type: "bigint" })
@@ -19,8 +13,8 @@ export class PlaygroundMessages {
   @Column({ type: "bigint", nullable: true })
   session_id?: number;
 
-  @Column({ type: "enum", enum: PlaygroundSender, nullable: true })
-  sender?: PlaygroundSender;
+  @Column({ type: "varchar", nullable: true })
+  sender?: string;
 
   @Column({ type: "text", nullable: true })
   message?: string;

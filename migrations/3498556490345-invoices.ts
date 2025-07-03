@@ -27,8 +27,8 @@ export class Invoices3498556490345 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["paid", "unpaid", "refunded"],
+            type: "string",
+
             isNullable: true,
           },
           {

@@ -1,10 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum SubscriptionStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  CANCELLED = "cancelled",
-}
+ 
 
 @Entity("subscriptions")
 export class Subscriptions {
@@ -17,8 +13,8 @@ export class Subscriptions {
   @Column({ type: "bigint", nullable: true })
   plan_id?: number;
 
-  @Column({ type: "enum", enum: SubscriptionStatus, nullable: true })
-  status?: SubscriptionStatus;
+  @Column({ type: "varchar",   nullable: true })
+  status?: string;
 
   @Column({ type: "timestamp", nullable: true })
   next_payment_due?: Date;

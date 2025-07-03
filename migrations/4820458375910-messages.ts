@@ -22,8 +22,8 @@ export class Messages4820458375910 implements MigrationInterface {
           },
           {
             name: "sender",
-            type: "enum",
-            enum: ["user", "bot"],
+            type: "string",
+
             isNullable: true,
           },
           {

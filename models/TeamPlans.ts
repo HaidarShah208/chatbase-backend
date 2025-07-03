@@ -1,11 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum TeamPlanStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  PENDING = "pending",
-  EXPIRED = "expired",
-}
+ 
 
 @Entity("team_plans")
 export class TeamPlans {
@@ -18,8 +13,8 @@ export class TeamPlans {
   @Column({ type: "bigint", nullable: true })
   plan_id?: number;
 
-  @Column({ type: "enum", enum: TeamPlanStatus, nullable: true })
-  status?: TeamPlanStatus;
+  @Column({ type: "varchar",  nullable: true })
+  status?: string;
 
   @Column({ type: "timestamp", nullable: true })
   started_at?: Date;

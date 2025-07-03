@@ -27,8 +27,8 @@ export class BillingHistory1703123456789 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["paid", "unpaid", "pending"],
+            type: "string",
+
             isNullable: true,
           },
           {

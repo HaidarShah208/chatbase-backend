@@ -27,8 +27,8 @@ export class PlaygroundSessions7683987649834 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive", "completed", "failed"],
+            type: "string",
+
             isNullable: true,
           },
 

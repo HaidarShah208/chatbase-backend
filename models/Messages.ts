@@ -1,9 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export enum MessageSender {
-  USER = "user",
-  BOT = "bot",
-}
+ 
 
 @Entity("messages")
 export class Messages {
@@ -13,8 +10,8 @@ export class Messages {
   @Column({ type: "bigint", nullable: true })
   conversation_id?: number;
 
-  @Column({ type: "enum", enum: MessageSender, nullable: true })
-  sender?: MessageSender;
+  @Column({ type: "varchar",   nullable: true })
+  sender?: string;
 
   @Column({ type: "text", nullable: true })
   message?: string;

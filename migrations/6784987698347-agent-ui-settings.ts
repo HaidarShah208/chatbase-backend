@@ -38,8 +38,8 @@ export class AgentUiSettings6784987698347 implements MigrationInterface {
           },
           {
             name: "theme",
-            type: "enum",
-            enum: ["light", "dark", "auto"],
+            type: "string",
+
             isNullable: true,
           },
           {
@@ -64,14 +64,14 @@ export class AgentUiSettings6784987698347 implements MigrationInterface {
           },
           {
             name: "button_shape",
-            type: "enum",
-            enum: ["rounded", "square", "pill"],
+            type: "string",
+
             isNullable: true,
           },
           {
             name: "layout_alignment",
-            type: "enum",
-            enum: ["left", "center", "right"],
+            type: "string",
+
             isNullable: true,
           },
 

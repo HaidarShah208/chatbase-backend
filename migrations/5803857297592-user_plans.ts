@@ -27,8 +27,8 @@ export class UserPlans5803857297592 implements MigrationInterface {
           },
           {
             name: "status",
-            type: "enum",
-            enum: ["active", "inactive", "expired"],
+            type: "string",
+
             isNullable: true,
           },
           {

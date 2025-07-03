@@ -5,23 +5,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-export enum AgentUiTheme {
-  LIGHT = "light",
-  DARK = "dark",
-  AUTO = "auto",
-}
-
-export enum ButtonShape {
-  ROUNDED = "rounded",
-  SQUARE = "square",
-  PILL = "pill",
-}
-
-export enum LayoutAlignment {
-  LEFT = "left",
-  CENTER = "center",
-  RIGHT = "right",
-}
+ 
 
 @Entity("agent_ui_settings")
 export class AgentUiSettings {
@@ -40,8 +24,8 @@ export class AgentUiSettings {
   @Column({ type: "text", nullable: true })
   cta_text?: string;
 
-  @Column({ type: "enum", enum: AgentUiTheme, nullable: true })
-  theme?: AgentUiTheme;
+  @Column({ type: "varchar",  nullable: true })
+  theme?: string;
 
   @Column({ type: "text", nullable: true })
   colors_json?: string;
@@ -55,11 +39,11 @@ export class AgentUiSettings {
   @Column({ type: "text", nullable: true })
   icon_url?: string;
 
-  @Column({ type: "enum", enum: ButtonShape, nullable: true })
-  button_shape?: ButtonShape;
+  @Column({ type: "varchar",  nullable: true })
+  button_shape?: string;
 
-  @Column({ type: "enum", enum: LayoutAlignment, nullable: true })
-  layout_alignment?: LayoutAlignment;
+  @Column({ type: "varchar",  nullable: true })
+  layout_alignment?: string;
 
   @Column({ type: "text", nullable: true })
   display_name?: string;
